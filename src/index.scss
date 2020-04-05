@@ -6,6 +6,7 @@
   font-family: "Roboto", -apple-system, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
 body {
@@ -31,8 +32,7 @@ body {
 
   &__sidebar {
     background-color: #f4f6f8;
-    width: 200px;
-    height: calc(100% - 120px);
+    width: 240px;
     border-right: 1px solid #f1f1f1;
     padding: 60px 20px;
   }
@@ -52,6 +52,7 @@ body {
   padding: 10px 20px;
   cursor: pointer;
   font-size: 14px;
+  transition: 0.4s;
 
   &:hover {
     background: darken(#4dd599, 6%);
