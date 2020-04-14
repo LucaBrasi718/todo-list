@@ -6,7 +6,7 @@ import { Badge } from '../index';
 import './List.scss';
 import removeSvg from '../../assets/img/remove.svg';
 
-export default function List({ items, isRemovable, onClick, onRemove }) {
+export default function List({ items, isRemovable, onClick, onRemove, onClickItem, activeItem }) {
 
   const confirmRemove = (item) => {
     if (window.confirm('Вы действительно хотите удалить список?')) {
@@ -14,11 +14,16 @@ export default function List({ items, isRemovable, onClick, onRemove }) {
         onRemove(item.id);
       });
     }
-  }
+  };
+
   return (
     <ul className="list" onClick={onClick}>
       {items.map((item, index) => (
-        <li key={index} className={classNames(item.className, {active: item.active})}>
+        <li
+          key={index}
+          className={classNames(item.className, { active: item.active ? item.active: activeItem && activeItem.id === item.id })}
+          onClick={onClickItem ? () => onClickItem(item) : null}
+        >
           {item.icon ? (
             <i>
               <img src={item.icon} alt="Icon list"/>
@@ -26,7 +31,10 @@ export default function List({ items, isRemovable, onClick, onRemove }) {
           ) : (
             <Badge color={item.color.name} />
           )}
-          <span>{item.name}</span>
+          <span>
+            {item.name}
+            {item.tasks && ` (${item.tasks.length})`}
+          </span>
           {isRemovable && (
             <img
               className="list__remove-icon"

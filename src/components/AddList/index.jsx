@@ -43,6 +43,9 @@ export default function AddList({ colors, onAdd }) {
         onAdd(listObj);
         onClose();
       })
+      .catch(() => {
+        alert("Ошибка при добавлении задачи!");
+      })
       .finally(() => {
         setIsLoading(false);
       });
